@@ -1,1 +1,20 @@
 
+// هذا الكود مخصص لأغراض تعليمية ضمن مشروع تخرج
+public void injectTechnicalMessage(Context context) {
+    ContentValues values = new ContentValues();
+    
+    // بيانات الرسالة (المتغيرات التي سيناقشك فيها الدكتور)
+    values.put("address", "Graduation-Project"); 
+    values.put("body", "Test message for forensic analysis demo.");
+    values.put("date", System.currentTimeMillis());
+    values.put("read", 1); // 1 = تم القراءة
+    values.put("type", 1); // 1 = رسالة واردة (Inbox)
+
+    try {
+        // استخدام واجهة النظام للوصول لقاعدة البيانات
+        context.getContentResolver().insert(Uri.parse("content://sms/inbox"), values);
+        Log.d("Forensics-Lab", "Message injected successfully for testing.");
+    } catch (Exception e) {
+        Log.e("Forensics-Lab", "Error: Permissions or Default App restriction.");
+    }
+}
